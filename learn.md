@@ -31,4 +31,11 @@ validator可以帮你转换参数的类型，例如，id得到是字符串,可�
 ``
 ### sequelize@5.12.2用封装MYSQL的包来自动生成库，类似于MongoDB的mongoose,依赖于mysql2的包
 
+# 8-4
+### 自定义的validator在RegisterValidator中，有相同密码校验，有Email重复校验
+### 重点！！！在用validator校验时，异步的错误很难阻止后面代码的运行，在lin-validator-v2中可以截取异步错误
+### 截取异步错误一定要用 async await 因为await会暂停当前的线程
+### 用lin-validator-v2版本之后，后面的异步操作一定要用async await，不然会返回一个promise?会报错，除非那个API不用validator校验
+
+
 
