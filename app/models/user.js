@@ -23,6 +23,19 @@ class User extends Model{
     }
     return user
   }
+
+  //查询微信的openid是否存在
+  static async getUserByOpenid(openid){
+    const user = await User.findOne({
+      where:{openid}
+    })
+    return user
+  }
+
+  //新建微信用户
+  static async registerByOpenid(openid){
+    return await User.create({openid})
+  }
 }
 
 //初始化属性

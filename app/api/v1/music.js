@@ -10,6 +10,7 @@ const {Auth} = require('../../../middlewares/auth')
 router.get('/music/:id',new Auth().m, async (ctx,next)=>{
   //需要将ctx这个上下文传到validator
   const v = await new PositiveIntegerValidator().validate(ctx)
+
   //validator可以帮你转换参数的类型，例如，id得到是字符串,可以解析为整形,不解析的话，在后面加上parse=false
   console.log(typeof v.get('path.id',parse=true))
   //在校验无误时，需返回一个正确信息

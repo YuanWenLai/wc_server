@@ -1,11 +1,13 @@
 //检验登陆
 const Router = require('koa-router')
-const {TokenValidator} = require('../../validator/validatorr')
 const {ParameterException} = require('../../../core/http-exception')
 const {LoginType} = require('../../lib/enum')
 const {User} = require('../../models/user')
 const {generateToken} = require('../../../core/util')
 const {Auth} = require('../../../middlewares/auth')
+const {WXManger} = require('../../services/wx')
+const {TokenValidator,NotEmptyValidator} = require('../../validator/validatorr')
+
 
 const router = new Router({
   prefix:'/v1/token'  //路由的前缀
@@ -20,6 +22,7 @@ router.post('/',async (ctx)=>{
       token = await emailLogin(v.get('body.account'),v.get('body.secret'))
       break;
     case LoginType.USER_MINI_PROGRAM:
+      token = await WXManger.codeToken(v.get('body.account'))
       break;
     case LoginType.ADMIN_EMAIL:
       break;
@@ -31,6 +34,18 @@ router.post('/',async (ctx)=>{
     token
   }
 })
+
+router.post('/verify',async (ctx)=>{
+  //校验API跳转携带的token
+  const v =await new NotEmptyValidator().validate(ctx)
+  const result = await Auth.vetifyToken(v.get('body.token'))
+  console.log(result)
+  ctx.body = {
+    result
+  }
+})
+
+
 
 //处理登陆逻辑，
 async function emailLogin(account,secret){

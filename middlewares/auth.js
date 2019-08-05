@@ -48,6 +48,16 @@ class Auth {
       await next()
     }
   }
+
+  //加入一个静态方法，检验小程序的令牌
+  static async vetifyToken(token){
+    try {
+      jwt.verify(token,security.secretKey)
+      return true
+    }catch (error) {
+      return false
+    }
+  }
 }
 
 module.exports = {Auth}

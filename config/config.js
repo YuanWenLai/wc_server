@@ -14,5 +14,11 @@ module.exports = {
     secretKey:'cavin',
     //在开发阶段，token的有效时间可以长一点，
     expiresIN:60*60*30*24
+  },
+  wx:{
+    appId:'wx7e294a09149760bf',
+    appSecret:'6019f59c089caf600274ea77fa15da18',
+    //用%s来获取占位符
+    loginUrl:'https://api.weixin.qq.com/sns/jscode2session?appid=%s&secret=%s&js_code=%s&grant_type=authorization_code'
   }
 }
