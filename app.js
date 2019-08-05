@@ -3,6 +3,9 @@ const parser = require('koa-bodyparser')
 const InitManager = require('./core/init')
 const catchError = require('./middlewares/exception')
 
+
+require('./app/models/classic')
+require('./app/models/flow')
 /*ss*/
 const app = new Koa()
 
