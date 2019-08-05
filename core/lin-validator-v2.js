@@ -41,6 +41,7 @@ class LinValidator {
       if (value == null) {
         const keys = path.split('.')
         const key = last(keys)
+
         return get(this.parsed.default, key)
       }
       return value

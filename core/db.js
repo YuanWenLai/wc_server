@@ -23,7 +23,8 @@ const sequelize = new Sequelize(dbName,user,password,{
 
 //使用了force:true参数，这个参数表示首先删除表再重新创建表
 sequelize.sync({
-  force:true
+  //开发阶段调试成false，避免每一次刷新一次删除一次数据库
+  force:false
 })
 
 module.exports = {

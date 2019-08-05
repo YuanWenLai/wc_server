@@ -13,8 +13,54 @@ class ParameterException  extends HttpException{
     super()
     this.message = message || '参数错误'
     this.errorCode = errorCode || 10000
-    this.code = 400
+    this.status = 400
   }
 }
 
-module.exports = {HttpException ,ParameterException  }
+//成功信息也用Error的派生类来封装，信息是成功就OK
+class Success extends HttpException{
+  constructor(message,errorCode){
+    super()
+    this.status = 201
+    this.message = message || '操作ok'
+    this.errorCode = errorCode || 1
+  }
+}
+
+//查询数据库未找到
+class NotFound extends HttpException{
+  constructor(message,errorCode){
+    super()
+    this.message = message || '资源未找到'
+    this.errorCode = errorCode || 10000
+    this.status = 404
+  }
+}
+
+//登陆失败，即授权用户失败
+class AuthFailed extends HttpException{
+  constructor(message,errorCode){
+    super()
+    this.message = message || '授权失败'
+    this.status = 401
+    this.errorCode = errorCode || 10004
+  }
+}
+
+//JWT令牌不符合，则无法访问这个API
+class Forbbiden extends HttpException{
+  constructor(message,errorCode){
+    super()
+    this.message = message || '无权限访问'
+    this.status = 403
+    this.errorCode = 10006
+  }
+}
+module.exports = {
+  HttpException ,
+  ParameterException ,
+  Success,
+  NotFound,
+  AuthFailed,
+  Forbbiden
+}

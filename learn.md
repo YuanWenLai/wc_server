@@ -37,5 +37,17 @@ validator可以帮你转换参数的类型，例如，id得到是字符串,可�
 ### 截取异步错误一定要用 async await 因为await会暂停当前的线程
 ### 用lin-validator-v2版本之后，后面的异步操作一定要用async await，不然会返回一个promise?会报错，除非那个API不用validator校验
 
+# 8-5
++ 增加了登陆的校验信息
++ 用jsonwebtoken来生成token返回给前端
++ 在User的Model中定义了校验函数vertifyEmailPassword检验用户的存在
++ 再password的Model属性中增加set（）函数，用于密码的加密
+
+### API分权限，有公开API，非公开API需要携带token才能访问，token失效和非法无法访问
++ basic-auth用于解码HTTPBasicAuth的再次加密
++ token只能检验用户是否非法，还需加权限来分类用户
++ 权限分级，普通用户的scope是8，管理员的scope是16
++ 给每个API赋值一个数字，用户访问时，与API的数字比较，看是否可以访问
+
 
 

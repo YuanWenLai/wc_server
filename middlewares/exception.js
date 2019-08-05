@@ -1,6 +1,7 @@
 const {HttpException} = require('../core/http-exception')
 const catchError = async (ctx,next) => {
   try{
+    //检测中间键的每一个错误
     await next()
   }catch (error) {
     //判断是生产环境还是开发环境，用于调试信息展示在console中

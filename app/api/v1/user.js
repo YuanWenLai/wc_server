@@ -1,5 +1,6 @@
 const Router = require('koa-router')
 const {RegisterValidator} = require('../../validator/validatorr')
+const {Success} = require('../../../core/http-exception')
 
 const {User} = require('../../models/user')
 const router = new Router({
@@ -9,14 +10,14 @@ const router = new Router({
 
 router.post('/register',async (ctx)=>{
   const v = await new RegisterValidator().validate(ctx)
-
   const user = {
     email:v.get('body.email'),
     password:v.get('body.password1'),
     nickname:v.get('body.nickname')
   }
-  User.create(user)
-  ctx.body='success'
+  await User.create(user)
+  //抛出成功的信息
+  throw new Success()
 })
 
 module.exports = router

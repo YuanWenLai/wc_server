@@ -1,6 +1,7 @@
 //存放各种校验器
 const  {LinValidator,Rule} = require('../../core/lin-validator-v2')
 const {User} = require('../models/user')
+const {LoginType} = require('../lib/enum')
 
 class PositiveIntegerValidator extends LinValidator{
   constructor(){
@@ -45,4 +46,32 @@ class RegisterValidator extends LinValidator{
   }
 }
 
-module.exports = {PositiveIntegerValidator,RegisterValidator}
+class TokenValidator extends LinValidator{
+  constructor(){
+    super()
+    //校验登陆的账号信息
+    this.account = [
+      new Rule('isLength','不符合账号规则',{min:4,max:32})
+    ]
+    //校验登陆的密码，isOptional的作用是，有密码的情况下校验，没有密码就不校验密码
+    this.secret = [
+      new Rule('isOptional'),
+      new Rule('isLength','至少6个字符',{min:6,max:128})
+    ]
+  }
+  //校验登陆用户的类型
+  validateLoginType(vals){
+    if(!vals.body.type){
+      throw new Error('type是必须的参数')
+    }
+    if(!LoginType.isThisType(vals.body.type)){
+      throw new Error('type参数不合法')
+    }
+  }
+}
+
+module.exports = {
+  PositiveIntegerValidator,
+  RegisterValidator,
+  TokenValidator,
+}
