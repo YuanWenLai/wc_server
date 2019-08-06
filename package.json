@@ -25,9 +25,9 @@
     "validator": "^11.1.0"
   },
   "_moduleAliases": {
-    "@root"      : ".",
-    "@models" : "app/models",
-    "@validator"  : "app/validator",
+    "@root": ".",
+    "@models": "app/models",
+    "@validator": "app/validator",
     "@middlewares": "middlewares",
     "@core": "core"
   }

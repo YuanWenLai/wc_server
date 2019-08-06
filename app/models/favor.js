@@ -1,4 +1,4 @@
-const {Sequelize,Model} = require('sequelize')
+const {Sequelize,Model,Op} = require('sequelize')
 const {sequelize} = require('../../core/db')
 const {LikeError,DislikeError} = require('../../core/http-exception')
 const {Art} = require('./art')
@@ -26,7 +26,8 @@ class Favor extends Model{
         type,
         uid
       },{transaction:t})//t就是该执行的事务t
-      const art =await Art.getData(art_id,type)
+      //在再次修改art类结构的fav_nums数据时，不能够将时间字段去除，scope = false
+      const art =await Art.getData(art_id,type,false)
       await art.increment('fav_nums',{
         by:1,
         transaction:t
@@ -53,12 +54,41 @@ class Favor extends Model{
         force:true,
         transaction:t
       })
-      const art =await Art.getData(art_id,type)
+      const art =await Art.getData(art_id,type,false)
       await art.decrement('fav_nums',{
         by:1,
         transaction:t
       })
     })
+  }
+
+  //是否用户喜欢的文章
+  static async userLikeit(art_id,type,uid){
+    const favor =await Favor.findOne({
+      where:{
+        art_id,
+        type,
+        uid
+      }
+    })
+    if(favor){//如果存在数据表，证明已经点赞过
+      return true
+    }else {
+      return false
+    }
+  }
+
+  //获取用户收藏的期刊
+  static async getMyClassFavor(uid){
+    const arts =await Favor.findAll({
+      where:{
+        uid,
+        type:{
+          [Op.not]:400
+        }
+      }
+    })
+    return await Art.getArtList(arts)
   }
 }
 
