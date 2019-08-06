@@ -44,4 +44,23 @@ router.get('/:index/next',new Auth().m,async ctx =>{
   ctx.body = art
 })
 
+//获取当前一期的下一期
+router.get('/:index/prev',new Auth().m,async ctx =>{
+  const v = await new PositiveIntegerValidator().validate(ctx,{
+    id:'index'
+  })
+  const index = v.get('path.index')
+  const flow = await Flow.findOne({
+    where:{
+      index:index-1
+    }
+  })
+  if(!flow){
+    throw new NotFound('没有找到上一期')
+  }
+  //先得到文章的信息
+  const art = await Art.getData(flow.art_id,flow.type)
+  ctx.body = art
+})
+
 module.exports = router
