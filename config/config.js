@@ -20,5 +20,10 @@ module.exports = {
     appSecret:'6019f59c089caf600274ea77fa15da18',
     //用%s来获取占位符
     loginUrl:'https://api.weixin.qq.com/sns/jscode2session?appid=%s&secret=%s&js_code=%s&grant_type=authorization_code'
-  }
+  },
+  //外部图书的url参数
+  yushu: {
+    detailUrl: "http://t.yushu.im/v2/book/id/%s",
+    keywordUrl: "http://t.yushu.im/v2/book/search?q=%s&count=%s&start=%s&summary=%s"
+  },
 }

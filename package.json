@@ -29,6 +29,7 @@
     "@models": "app/models",
     "@validator": "app/validator",
     "@middlewares": "middlewares",
-    "@core": "core"
+    "@core": "core",
+    "@config": "config/config"
   }
 }

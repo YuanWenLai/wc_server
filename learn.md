@@ -59,6 +59,8 @@ validator可以帮你转换参数的类型，例如，id得到是字符串,可�
 ### sequelize的Op,是操作SQL语句的操作运算符，详情查百度
 
 + 如果循环调用js文件的话，可以其中一个不再全局调用，在局部调用，不会出错
++ 有用户点击跳转的API才进行权限认证Auth
++ 注意 new Rule("isOptional", "", 0) validator的参数不能少
 
 
 
