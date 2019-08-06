@@ -56,11 +56,34 @@ class Forbbiden extends HttpException{
     this.errorCode = 10006
   }
 }
+
+//重复点赞
+class LikeError extends HttpException{
+  constructor(message,errorCode){
+    super()
+    this.message = message || '你已经点赞过了！'
+    this.status = 400
+    this.errorCode = 10006
+  }
+}
+
+//再次取消点赞错误
+class DislikeError extends HttpException{
+  constructor(message,errorCode){
+    super()
+    this.message = message || '你已经取消点赞了！'
+    this.status = 400
+    this.errorCode = 10006
+  }
+}
+
 module.exports = {
   HttpException ,
   ParameterException ,
   Success,
   NotFound,
   AuthFailed,
-  Forbbiden
+  Forbbiden,
+  LikeError,
+  DislikeError
 }

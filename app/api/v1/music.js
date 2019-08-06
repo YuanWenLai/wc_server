@@ -1,6 +1,6 @@
 const Router = require('koa-router')
 const router = new Router()
-const {PositiveIntegerValidator} = require('../../validator/validatorr')
+const {PositiveIntegerValidator} = require('../../validator/validator')
 
 //用于检测API跳转权限
 const {Auth} = require('../../../middlewares/auth')

@@ -3,6 +3,16 @@ const  {LinValidator,Rule} = require('../../core/lin-validator-v2')
 const {User} = require('../models/user')
 const {LoginType} = require('../lib/enum')
 
+//检查类型
+function checkType(vals) {
+  if(!vals.body.type){
+    throw new Error('type是必须的参数')
+  }
+  if(!LoginType.isThisType(vals.body.type)){
+    throw new Error('type参数不合法')
+  }
+}
+
 class PositiveIntegerValidator extends LinValidator{
   constructor(){
     super()
@@ -58,17 +68,20 @@ class TokenValidator extends LinValidator{
       new Rule('isOptional'),
       new Rule('isLength','至少6个字符',{min:6,max:128})
     ]
+    this.validateType = checkType
   }
   //校验登陆用户的类型
-  validateLoginType(vals){
+  /*validateLoginType(vals){
     if(!vals.body.type){
       throw new Error('type是必须的参数')
     }
     if(!LoginType.isThisType(vals.body.type)){
       throw new Error('type参数不合法')
     }
-  }
+  }*/
 }
+
+
 
 class NotEmptyValidator extends LinValidator{
   constructor(){
@@ -79,9 +92,18 @@ class NotEmptyValidator extends LinValidator{
   }
 }
 
+//对点赞参数的校验
+class LikeValidator extends PositiveIntegerValidator{
+  constructor(){
+    super()
+    this.validateType = checkType
+  }
+}
+
 module.exports = {
   PositiveIntegerValidator,
   RegisterValidator,
   TokenValidator,
-  NotEmptyValidator
+  NotEmptyValidator,
+  LikeValidator
 }

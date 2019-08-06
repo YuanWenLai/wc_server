@@ -3,10 +3,12 @@ const parser = require('koa-bodyparser')
 const InitManager = require('./core/init')
 const catchError = require('./middlewares/exception')
 
+//用于请求路径的别名
+require('module-alias/register');
 
 require('./app/models/classic')
 require('./app/models/flow')
-/*ss*/
+
 const app = new Koa()
 
 app.use(parser())

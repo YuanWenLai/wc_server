@@ -50,6 +50,12 @@ validator可以帮你转换参数的类型，例如，id得到是字符串,可�
 + 给每个API赋值一个数字，用户访问时，与API的数字比较，看是否可以访问
 + 每次跳转路由都需要basicAuth来进行认证（http身份认证机制HttpBasicAuth）
 
+# 8-6
++ 增加了点赞与取消点赞的API
++ 学习了sequelize的删除，事务，增长和下降数据等操作
++ 增加了module-alias的npm包，用来更改请求路径的别名如@api/demo
+
+
 
 
 

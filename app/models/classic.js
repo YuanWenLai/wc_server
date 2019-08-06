@@ -1,5 +1,5 @@
 const {Sequelize,Model} = require('sequelize')
-const {sequelize} = require('../../core/db')
+const {sequelize} = require('@core/db')
 
 const classicFields = {
   image: Sequelize.STRING,
@@ -31,7 +31,7 @@ Sentence.init(classicFields,{
   tableName:'sentence'
 })
 
-class Misic extends Model{
+class Music extends Model{
 
 }
 
@@ -39,13 +39,13 @@ const musicFiles = Object.assign({
   url: Sequelize.STRING
 },classicFields)
 
-Misic.init(musicFiles,{
+Music.init(musicFiles,{
   sequelize,
   tableName:'music'
 })
 
 module.exports = {
   Movie,
-  Misic,
+  Music,
   Sentence
 }

@@ -6,7 +6,7 @@ const {User} = require('../../models/user')
 const {generateToken} = require('../../../core/util')
 const {Auth} = require('../../../middlewares/auth')
 const {WXManger} = require('../../services/wx')
-const {TokenValidator,NotEmptyValidator} = require('../../validator/validatorr')
+const {TokenValidator,NotEmptyValidator} = require('../../validator/validator')
 
 
 const router = new Router({
