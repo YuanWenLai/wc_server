@@ -13,6 +13,17 @@ class Book extends Model{
     return detail.data
   }
 
+  //书籍的数量
+  static async getMyFavorCount(uid){
+    const count = await Favor.count({
+      where:{
+        type:400,
+        uid
+      }
+    })
+    return count
+  }
+
   //summary = 返回概要信息给用户
   static async searchFromYuShu(q,start,count,summary = 1){
       //encodeURI将可能是中文的字符串转义
@@ -30,7 +41,7 @@ Book.init({
   },
   fav_nums:{
     type:Sequelize.INTEGER,
-    default:0
+    defaultValue:0
   }
 },{
   sequelize,

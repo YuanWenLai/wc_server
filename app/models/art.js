@@ -62,9 +62,9 @@ class Art {
 
 
   //调用getData，第三个参数的作用是，是否调用scope作用域，默认为true
-  static async getData(art_id,type,useScope = true){
+  static async getData(art_id,type){
+    const {HotBook} = require('@models/hot_book')
     let art = null
-    const scope = useScope ? 'bh' : null
     let finder = {
       where:{
         id:art_id
@@ -73,18 +73,19 @@ class Art {
     switch (type) {
       case 100:
         //movie类型
-        art = await Movie.scope(scope).findOne(finder)
+        art = await Movie.findOne(finder)
         break
       case 200:
         //music类型
-        art = await Music.scope(scope).findOne(finder)
+        art = await Music.findOne(finder)
         break
       case 300:
         //sentence类型
-        art = await Sentence.scope(scope).findOne(finder)
+        art = await Sentence.findOne(finder)
         break
       case 400:
         //book
+        art = await HotBook.findOne(finder)
         break
       default:
         break

@@ -10,7 +10,8 @@ class Hot_book extends Model{
         'index'
       ]
     })
-    //2.获取书籍的id，用于查询每本书的点赞信息
+    //在hot_book表中添加fav_nums字段，取代计算favor表的点赞总量
+    /*//2.获取书籍的id，用于查询每本书的点赞信息
     const ids = []
     books.forEach((book) =>{
       ids.push(book.id)
@@ -28,10 +29,9 @@ class Hot_book extends Model{
     })
     //favors的字段类似于[art_id: 7,count: 1]
     //4.遍历对比books和favors，相同id的，favors的count字段加到books的book中
-    console.log(favors)
     books.forEach( book =>{
       Hot_book._getEachBookStatus(book,favors)
-    })
+    })*/
     return books
   }
 
@@ -51,7 +51,8 @@ Hot_book.init({
   index:Sequelize.INTEGER,
   image:Sequelize.STRING,
   author:Sequelize.STRING,
-  title:Sequelize.STRING
+  title:Sequelize.STRING,
+  fav_nums:Sequelize.INTEGER
 },{
   sequelize,
   tableName:'hot_book'

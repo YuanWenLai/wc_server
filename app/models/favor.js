@@ -27,7 +27,7 @@ class Favor extends Model{
         uid
       },{transaction:t})//t就是该执行的事务t
       //在再次修改art类结构的fav_nums数据时，不能够将时间字段去除，scope = false
-      const art =await Art.getData(art_id,type,false)
+      const art =await Art.getData(art_id,type)
       await art.increment('fav_nums',{
         by:1,
         transaction:t
@@ -43,6 +43,7 @@ class Favor extends Model{
         uid
       }
     })
+
     if(!favor){//如果不存在数据表，证明已经取消点赞过了
       throw new DislikeError()
     }
@@ -54,7 +55,7 @@ class Favor extends Model{
         force:true,
         transaction:t
       })
-      const art =await Art.getData(art_id,type,false)
+      const art =await Art.getData(art_id,type)
       await art.decrement('fav_nums',{
         by:1,
         transaction:t
@@ -75,6 +76,22 @@ class Favor extends Model{
       return true
     }else {
       return false
+    }
+  }
+
+  //书籍点赞详情
+  static async bookFavor(uid,bookId){
+    const art =await Art.getData(bookId,400)
+    const myFavor = await Favor.findOne({
+      where:{
+        art_id:bookId,
+        uid,
+        type:400
+      }
+    })
+    return {
+      fav_nums:art.fav_nums,
+      like_status:myFavor?true:false
     }
   }
 
