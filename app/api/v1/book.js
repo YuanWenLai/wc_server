@@ -37,7 +37,7 @@ router.get('/search', async ctx =>{
   const result = await Book.searchFromYuShu(
     v.get("query.q"),
     v.get("query.start"),
-    v.get("query.count")
+    //v.get("query.count")
   );
   ctx.body = result;
 })
@@ -88,7 +88,9 @@ router.get('/hot_keyword',async ctx=>{
       '白夜行',
       '韩寒',
       '金庸',
-      '王小波'
+      '王小波',
+      '百年孤独',
+      '边城'
     ]
   }
 })

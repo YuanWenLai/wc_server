@@ -25,7 +25,7 @@ class Book extends Model{
   }
 
   //summary = 返回概要信息给用户
-  static async searchFromYuShu(q,start,count,summary = 1){
+  static async searchFromYuShu(q,start,count=10,summary = 1){
       //encodeURI将可能是中文的字符串转义
     const url = util.format(yushuUrl.keywordUrl,encodeURI(q),count,start,summary)
     const detail = await axios(url)

@@ -27,11 +27,16 @@ class Favor extends Model{
         uid
       },{transaction:t})//t就是该执行的事务t
       //在再次修改art类结构的fav_nums数据时，不能够将时间字段去除，scope = false
+      console.log(art_id)
+      console.log(favor)
       const art =await Art.getData(art_id,type)
-      await art.increment('fav_nums',{
-        by:1,
-        transaction:t
-      })
+      console.log(art)
+      if(art){
+        await art.increment('fav_nums',{
+          by:1,
+          transaction:t
+        })
+      }
     })
   }
 
@@ -56,10 +61,12 @@ class Favor extends Model{
         transaction:t
       })
       const art =await Art.getData(art_id,type)
-      await art.decrement('fav_nums',{
-        by:1,
-        transaction:t
-      })
+      if(art){
+        await art.decrement('fav_nums',{
+          by:1,
+          transaction:t
+        })
+      }
     })
   }
 
@@ -81,7 +88,18 @@ class Favor extends Model{
 
   //书籍点赞详情
   static async bookFavor(uid,bookId){
+    var favorNums
     const art =await Art.getData(bookId,400)
+    if (!art){
+        favorNums = await Favor.count({
+        where: {
+          art_id:bookId,
+          type:400
+        }
+      })
+    }else {
+      favorNums = art.fav_nums
+    }
     const myFavor = await Favor.findOne({
       where:{
         art_id:bookId,
@@ -90,7 +108,7 @@ class Favor extends Model{
       }
     })
     return {
-      fav_nums:art.fav_nums,
+      fav_nums:favorNums,
       like_status:myFavor?true:false
     }
   }
