@@ -21,15 +21,11 @@ router.get('/latest',new Auth().m, async (ctx,next)=>{
       ['index','DESC']
     ]
   })
-  console.log(flow.type)
   const art = await Art.getData(flow.art_id,flow.type)
   const favor = await Favor.userLikeit(flow.art_id,flow.type,ctx.auth.uid)
   art.setDataValue('index',flow.index)
   art.setDataValue('like_status',favor)
-
   ctx.body = art
-  /*let {content,fav_nums,image,pubdate,title,type} = art
-  ctx.body = {content,fav_nums,image,pubdate,title,type,index:flow.index}*/
 })
 
 //获取当前一期的下一期
