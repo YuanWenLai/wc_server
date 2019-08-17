@@ -27,10 +27,7 @@ class Favor extends Model{
         uid
       },{transaction:t})//t就是该执行的事务t
       //在再次修改art类结构的fav_nums数据时，不能够将时间字段去除，scope = false
-      console.log(art_id)
-      console.log(favor)
       const art =await Art.getData(art_id,type)
-      console.log(art)
       if(art){
         await art.increment('fav_nums',{
           by:1,

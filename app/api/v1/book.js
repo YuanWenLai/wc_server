@@ -45,9 +45,7 @@ router.get('/search', async ctx =>{
 //获取喜欢书籍的数量
 router.get('/favor/count',new Auth().m ,async ctx =>{
   const count = await Book.getMyFavorCount(ctx.auth.uid)
-  ctx.body = {
-    count
-  }
+  ctx.body = count
 })
 
 //获取书籍点赞信息

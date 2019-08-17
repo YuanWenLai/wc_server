@@ -29,7 +29,6 @@ class Art {
 
   static async _geiListByType(ids,type){
     let arts = []
-    const scope = 'bh'
     let finder = {
       where:{
         id:{
@@ -41,18 +40,15 @@ class Art {
     switch (type) {
       case 100:
         //movie类型
-        arts = await Movie.scope(scope).findAll(finder)
+        arts = await Movie.findAll(finder)
         break
       case 200:
         //music类型
-        arts = await Music.scope(scope).findAll(finder)
+        arts = await Music.findAll(finder)
         break
       case 300:
         //sentence类型
-        arts = await Sentence.scope(scope).findAll(finder)
-        break
-      case 400:
-        //book
+        arts = await Sentence.findAll(finder)
         break
       default:
         break
