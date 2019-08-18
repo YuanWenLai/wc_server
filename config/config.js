@@ -13,7 +13,7 @@ module.exports = {
     //用于jwt的token生成
     secretKey:'cavin',
     //在开发阶段，token的有效时间可以长一点，
-    expiresIN:60*60*24*3
+    expiresIN:60*60*24*7
   },
   wx:{
     appId:'wx7e294a09149760bf',
