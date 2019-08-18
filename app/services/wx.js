@@ -11,6 +11,7 @@ class WXManger {
 
   }
   static async codeToken(code){
+    console.log(code)
     const url = util.format(
       wx.loginUrl,
       wx.appId,

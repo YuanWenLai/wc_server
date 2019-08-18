@@ -17,6 +17,8 @@ router.post('/',async (ctx)=>{
   const v = await new TokenValidator().validate(ctx)
   //坑，v.get('body.type')得到的数据是字符串，因此v.get('body.type')*1转换为数字，再去对比
   let token
+  console.log(v.get('body.type'))
+  console.log(v.get('body.account'))
   switch (v.get('body.type')*1) {
     case LoginType.USER_EMAIL:
       token = await emailLogin(v.get('body.account'),v.get('body.secret'))
