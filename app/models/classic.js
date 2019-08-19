@@ -32,7 +32,24 @@ Sentence.init(classicFields,{
 })
 
 class Music extends Model{
+  //获取当个专辑歌单的歌曲
+  static async getMusicList(type){
+    return  await Music.findAll({
+      where:{
+        type
+      }
+    })
 
+  }
+
+  //获取单个歌曲的详情
+  static async getMusicDetail(id){
+   return await Music.findAll({
+     where:{
+       id
+     }
+   })
+  }
 }
 
 const musicFiles = Object.assign({

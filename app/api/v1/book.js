@@ -55,7 +55,6 @@ router.get('/:book_id/favor',new Auth().m ,async ctx =>{
   })
   const id = v.get('path.book_id')
   const likeStatus = await Favor.bookFavor(ctx.auth.uid,id)
-  console.log(likeStatus)
   ctx.body = likeStatus
 })
 
