@@ -11,10 +11,6 @@ const router = new Router({
 const {Auth} = require('../../../middlewares/auth')
 
 
-router.get('/',async ctx=>{
-  ctx.body = 'welcome music'
-})
-
 //获取热门歌单
 router.get('/getHotList',async ctx=>{
   ctx.body = await HotMusicList.getHotMusicList()
