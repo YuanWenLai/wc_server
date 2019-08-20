@@ -11,7 +11,8 @@ HotMusicList.init({
   type:Sequelize.STRING,
   image:Sequelize.STRING,
   fav_nums:Sequelize.INTEGER,
-  title:Sequelize.STRING
+  title:Sequelize.STRING,
+  content:Sequelize.STRING
 },{
   sequelize,
   tableName:'hot_music_list'

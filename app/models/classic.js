@@ -56,7 +56,19 @@ const musicFiles = Object.assign({
   url: Sequelize.STRING
 },classicFields)
 
-Music.init(musicFiles,{
+Music.init({
+  image: Sequelize.STRING,
+  content: Sequelize.STRING,
+  pubdate: Sequelize.DATEONLY,
+  fav_nums: {
+    type: Sequelize.INTEGER,
+    defaultValue: 0,
+  },
+  title: Sequelize.STRING,
+  type: Sequelize.TINYINT,
+  singer:Sequelize.STRING,
+  url:Sequelize.STRING
+},{
   sequelize,
   tableName:'music'
 })
