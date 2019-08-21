@@ -13,6 +13,8 @@ RecommendMusic.init({
   image:Sequelize.STRING,
   title:Sequelize.STRING,
   content:Sequelize.STRING,
+  url:Sequelize.STRING,
+  singer:Sequelize.STRING
 },{
   sequelize,
   tableName:'recommend_music'
