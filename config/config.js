@@ -1,11 +1,19 @@
 module.exports = {
   //生产环境：prod
   environment:'dev',
-  database:{
+  /*database:{
     dbName:'weapp',
     host:'localhost',
     user:'root',
     password:'8300589',
+    database:'weapp',
+    port:3306
+  },*/
+  database:{
+    dbName:'weapp',
+    host:'localhost',
+    user:'wenlai',
+    password:'123456',
     database:'weapp',
     port:3306
   },
