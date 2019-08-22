@@ -10,6 +10,10 @@ const router = new Router({
 //用于检测API跳转权限
 const {Auth} = require('../../../middlewares/auth')
 
+router.get('/',ctx=>{
+  console.log(212)
+  ctx.body='hello'
+})
 
 //获取热门歌单
 router.get('/getHotList',async ctx=>{

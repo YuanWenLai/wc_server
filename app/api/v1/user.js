@@ -8,6 +8,7 @@ const router = new Router({
 })
 
 
+
 router.post('/register',async (ctx)=>{
   const v = await new RegisterValidator().validate(ctx)
   const user = {
